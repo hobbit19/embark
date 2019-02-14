@@ -14,7 +14,12 @@ class Provider {
     this.web3Endpoint = options.web3Endpoint;
     this.logger = options.logger;
     this.isDev = options.isDev;
+    this.events = options.events;
     this.nonceCache = {};
+
+    this.events.setCommandHandler("blockchain:provider:contract:accounts:get", cb => {
+      cb(this.accounts);
+    });
   }
 
   getNonce(address, callback) {
